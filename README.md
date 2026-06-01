@@ -1,50 +1,40 @@
-  _  __    _         __  __  ____ _____    _____ _                 
- | |/ /   | |  /\   |  \/  |/ __ \_   _|  / ____| |                
- | ' /    | | /  \  | \  / | |  | || |   | (___ | |_ ___  _ __ ___ 
- |  < _   | |/ /\ \ | |\/| | |  | || |    \___ \| __/ _ \| '__/ _ \
- | . \ |__| / ____ \| |  | | |__| || |_   ____) | || (_) | | |  __/
- |_|\_\____/_/    \_\_|  |_|\____/_____| |_____/ \__\___/|_|  \___|
-                                                                   
-╔═══════════════════════════╗
-║   about the store v0.1    ║
-╚═══════════════════════════╝
-this is a store for installing apps from multiple sources, and updating the system.
-This is currently the alpha version, i am a solo dev so it might take a long time for future updates
-I am thinking about adding a GUI and a search bar,it will be a big upgrade
+# Kjamoi Store (v2.0)
 
-   ____ ___  ____  _____   _____            _       _                _ 
-  / ___/ _ \|  _ \| ____| | ____|_  ___ __ | | __ _(_)_ __   ___  __| |
- | |  | | | | | | |  _|   |  _| \ \/ / '_ \| |/ _` | | '_ \ / _ \/ _` |
- | |__| |_| | |_| | |___  | |___ >  <| |_) | | (_| | | | | |  __/ (_| |
-  \____\___/|____/|_____| |_____/_/\_\ .__/|_|\__,_|_|_| |_|\___|\__,_|
-                                     |_|                               
+A lightweight, automated Linux package installation and system update manager built with Python and SQLite3. **Kjamoi Store** provides a streamlined, unified interface to install applications across multiple Linux package managers while actively verifying and logging success/failure histories into a local relational database.
 
-This app uses subprocess library to run commands through the terminal , uses the list format in sub process for a safer experience,
-it uses a while loop to stay on unless the user wants to exit , it saves user input into the variables in the main.py code.
+---
 
+## Key Features in v2.0
 
-## Installation
-pip install kjamoi-store
+* **Unified Installation Interface:** Install packages seamlessly via `apt-get`, `snap`, `flatpak`, and `pip` using a single number-navigated CLI menu.
+* **Stateful Database Tracking:** Automatically logs successful installations to an `install_history` table and failed attempts to an `install_failed` table using SQLite3.
+* **Intelligent Path Verification:** Uses Python's native `shutil` library to safely verify if an application is active in the system `$PATH` post-installation.
+* **Dynamic Environments (`sudo` protection):** Dynamically detects if `sudo` is available in the running shell environment before prepending root execution rights, optimizing runtime safety.
+* **Safe System Maintenance:** Automates clean system updates (`update`, dependency dry-runs, and non-interactive upgrades) using stable `apt-get` system bindings.
 
-## Usage
-python main.py
+---
 
-   _____ _                                                _    __                             _       _              _ 
-  / ____| |                                              | |  / _|                           | |     | |            | |
- | (___ | |_ __ _ _   _    __ _ _ __ ___  _   _ _ __   __| | | |_ ___  _ __   _   _ _ __   __| | __ _| |_ ___  ___  | |
-  \___ \| __/ _` | | | |  / _` | '__/ _ \| | | | '_ \ / _` | |  _/ _ \| '__| | | | | '_ \ / _` |/ _` | __/ _ \/ __| | |
-  ____) | || (_| | |_| | | (_| | | | (_) | |_| | | | | (_| | | || (_) | |    | |_| | |_) | (_| | (_| | ||  __/\__ \ |_|
- |_____/ \__\__,_|\__, |  \__,_|_|  \___/ \__,_|_| |_|\__,_| |_| \___/|_|     \__,_| .__/ \__,_|\__,_|\__\___||___/ (_)
-                   __/ |                                                           | |                                 
-                  |___/                                                            |_|                                 
+##  How It Works under the Hood
 
+The application follows a clean execution pipeline to guarantee system state syncs with your logs:
 
+1. **User Choice:** User inputs a command via the numbered UI.
+2. **Execution:** The script maps the chosen package store and calls a managed subprocess using `apt-get` optimization rules.
+3. **Verification:** Rather than trusting terminal exit codes blindly, the tool directly queries the OS environment using `shutil.which()`.
+4. **Data Persistence:** Relational logging saves the app name, package manager, and a clean ISO-formatted timestamp into `kjamoi.db`.
 
-  __  __           _        _                      _                        _   _  ___           _ _ _ 
- |  \/  |         | |      | |               /\   | |                      | | | |/ / |         | (_) |
- | \  / | __ _  __| | ___  | |__  _   _     /  \  | |__  _ __ ___   ___  __| | | ' /| |__   __ _| |_| |
- | |\/| |/ _` |/ _` |/ _ \ | '_ \| | | |   / /\ \ | '_ \| '_ ` _ \ / _ \/ _` | |  < | '_ \ / _` | | | |
- | |  | | (_| | (_| |  __/ | |_) | |_| |  / ____ \| | | | | | | | |  __/ (_| | | . \| | | | (_| | | | |
- |_|  |_|\__,_|\__,_|\___| |_.__/ \__, | /_/    \_\_| |_|_| |_| |_|\___|\__,_| |_|\_\_| |_|\__,_|_|_|_|
-                                   __/ |                                                               
-                                  |___/                                                                                 
+---
+
+##  Getting Started
+
+### Prerequisites
+* Linux environment (Tested extensively on Linux Mint / Debian-based distros)
+* Python 3.8+
+* SQLite3 (Built into standard Python installations)
+
+### Installation & Execution
+
+1. Clone this repository to your local machine:
+   ```bash
+   git clone [https://github.com/YOUR_GITHUB_USERNAME/kjamoi-store.git](https://github.com/YOUR_GITHUB_USERNAME/kjamoi-store.git)
+   cd ~/kjamoi-store
