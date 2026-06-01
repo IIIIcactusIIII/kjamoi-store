@@ -38,3 +38,5 @@ The application follows a clean execution pipeline to guarantee system state syn
    ```bash
    git clone [https://github.com/IIIIcactusIIII/kjamoi-store.git](https://github.com/IIIIcactusIIII/kjamoi-store.git)
    cd ~/kjamoi-store
+##    Credits: Ahmed Khalil
+   this is a solo built open source app.
