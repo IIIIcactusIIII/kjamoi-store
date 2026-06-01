@@ -36,5 +36,5 @@ The application follows a clean execution pipeline to guarantee system state syn
 
 1. Clone this repository to your local machine:
    ```bash
-   git clone [https://github.com/YOUR_GITHUB_USERNAME/kjamoi-store.git](https://github.com/YOUR_GITHUB_USERNAME/kjamoi-store.git)
+   git clone [https://github.com/IIIIcactusIIII/kjamoi-store.git](https://github.com/IIIIcactusIIII/kjamoi-store.git)
    cd ~/kjamoi-store
